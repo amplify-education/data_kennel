@@ -1,6 +1,10 @@
 data\_kennel
 ============
 
+.. image:: https://api.codacy.com/project/badge/Grade/3599930cf25b4324a93b6d356bae893b
+   :alt: Codacy Badge
+   :target: https://www.codacy.com/app/CFER/data_kennel?utm_source=github.com&utm_medium=referral&utm_content=amplify-education/data_kennel&utm_campaign=badger
+
 Data Kennel is a CLI tool for managing Datadog infrastructure.
 
 About Amplify
