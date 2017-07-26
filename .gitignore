@@ -1,0 +1,54 @@
+# Mac OS X
+.DS_Store
+
+# Python bytecode
+*.py[cod]
+
+# Python packages
+*.egg
+*.egg-info
+eggs
+parts
+sdist
+.installed.cfg
+
+# Build products
+dist
+build
+venv
+
+# RPM directories
+BUILD
+BUILDROOT
+RPMS
+SOURCES
+SPEC
+SRPMS
+
+# Installer logs
+pip-log.txt
+
+# Test reports
+cover/
+.coverage
+cover
+report-nosetests.xml
+report-nosetests.txt
+reports/
+
+# Editor files
+*~
+*.sw?
+\#*#
+
+# IDE files
+.project
+.pydevproject
+.ropeproject
+
+# virtualenv file
+.venv
+
+# Data Kennel config
+data_kennel.yml
+*.iml

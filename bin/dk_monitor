@@ -1,0 +1,72 @@
+#!/usr/bin/env python
+"""
+Manages Datadog Monitors
+
+Usage:
+    dk_monitor [--debug] [--config=CONFIG | --config-dir=CONFIG_PATH] list [--tags=TAGS]...
+    dk_monitor [--debug] [--dry-run] [--config=CONFIG  | --config-dir=CONFIG_PATH] update [--tags=TAGS]...
+    dk_monitor [--debug] [--dry-run] [--config=CONFIG  | --config-dir=CONFIG_PATH] delete [--tags=TAGS]...
+    dk_monitor [--help]
+
+Commands:
+    list      List monitors.
+    update    Creates new monitors, updates existing monitors, and removes unconfigured monitors.
+    delete    Delete monitors.
+
+Options:
+    --help, -h                      Show this screen.
+    --debug, -v                     Log in debug level.
+    --tags TAGS, -t                 The tags to filter with.
+                                    Format: 'tag_name:tag_value'
+                                    Example: '--tags team:astronauts'
+    --dry-run                       Print what would happen, but don't actually do it.
+    --config CONFIG, -c             The path to the config file.
+    --config-dir CONFIG_PATH, -cd   The path to the config directory.
+"""
+from __future__ import print_function
+
+import os
+
+from docopt import docopt
+from schema import Schema, Or, And, Use, Regex, Optional
+
+from data_kennel.monitor import Monitor
+from data_kennel.config import Config
+from data_kennel.util import configure_logging, run_gracefully, print_table, convert_tags_to_dict
+
+
+ARGS_SCHEMA = Schema(
+    {
+        Optional("--config"): Or(None, Use(open, error='Config file should be readable')),
+        Optional("--config-dir"): Or(None, And(os.path.exists, lambda path : os.listdir(path),
+                                               error='Config Path should exists and include files')),
+        "--tags": [
+            And(str, Regex(r'^[\w]+:[\w]+$'))
+        ],
+        str: bool
+    }
+)
+
+
+def run():
+    """Parses command line and dispatches the commands"""
+    args = docopt(__doc__)
+
+    ARGS_SCHEMA.validate(args)
+
+    configure_logging(args["--debug"])
+    config = Config(config_path=args['--config'], config_dir=args['--config-dir'])
+    monitor = Monitor(config)
+    tags = convert_tags_to_dict(args['--tags'])
+
+    if args['list']:
+        monitors = monitor.list(tags=tags)
+        print_table(monitors, headers=['Name', 'State', 'Tags'])
+    elif args['update']:
+        monitor.update(dry_run=args['--dry-run'], tags=tags)
+    elif args['delete']:
+        monitor.delete(dry_run=args['--dry-run'], tags=tags)
+
+
+if __name__ == "__main__":
+    run_gracefully(run)

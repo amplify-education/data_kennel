@@ -1,0 +1,105 @@
+data_kennel:
+    # Team is automatically added as a tag/filter for all monitors updated/created/listed with this tool.
+    team: change_me
+
+monitors:
+    # See http://docs.datadoghq.com/api/?lang=python#monitor-create for detailed information about these fields.
+    # $team and any of the fields under `with_variables` can be used as string replacements in monitors, in the format of
+    # ${var_name}. EX: "${team}" --> "change_me"
+  - name: "Load is ${name} on ${hostclass} in ${environment}" # Name of the monitor. '${team} | ' is automatically prefixed.
+    type: "metric alert" # One of ['metric alert', 'service check', 'event alert']
+    query: "avg(last_5m):avg:system.load.norm.5{hostclass:${hostclass},!is_testing:1,environment:${environment}} > ${critical}"
+    # Message is shown only for alert conditions and a generic message is shown for recovery state. Warning state is not
+    # supported currently. Additionally, message supports all of the variable replacement supported by Datadog, as well
+    # as the variable replacement used by Data Kennel.
+    message: |
+        System load is {{value}} on ${hostclass}, which is {{comparator}} the threshold of {{threshold}}.
+        Autoscaling policy ${policy} will be triggered soon.
+    options:
+        # Additional optional configuration for monitors. See 'Common Options' in the Datadog Monitor API for more info:
+        # http://docs.datadoghq.com/api/?lang=python#monitor-create
+        notify_audit: True
+    tags:
+        hostclass: "${hostclass}"
+        environment: "${environment}"
+        policy_name: "${policy}"
+        policy_type: "SimpleScaling"
+    notify:
+      - "example@example.com"
+    with_variables:
+        # Variables should always be a string
+      - hostclass: "mhcbanana"
+        comparator: ">"
+        critical: "0.8"
+        environment: "ci"
+        policy: "up"
+        name: "high"
+      - hostclass: "mhcbanana"
+        comparator: "<"
+        critical: "0.2"
+        environment: "ci"
+        policy: "down"
+        name: "low"
+      - hostclass: "mhcbanana"
+        comparator: ">"
+        critical: "0.8"
+        environment: "staging"
+        policy: "up"
+        name: "high"
+      - hostclass: "mhcbanana"
+        comparator: "<"
+        critical: "0.2"
+        environment: "staging"
+        policy: "down"
+        name: "low"
+      - hostclass: "mhcbanana"
+        comparator: ">"
+        critical: "0.8"
+        environment: "production"
+        policy: "up"
+        name: "high"
+      - hostclass: "mhcbanana"
+        comparator: "<"
+        critical: "0.2"
+        environment: "production"
+        policy: "down"
+        name: "low"
+
+      # Example of Composite monitor
+    - name: "CPU  is ${name_1} - Memory ${name_2} on ${hostclass} in ${environment}"
+      type: "metric alert"
+      query: >
+      avg(last_5m):avg:system.cpu.system{hostclass:${hostclass},environment:${environment}}  ${comparator_1} ${critical_1}
+      &&
+      avg(last_5m):avg:system.mem.free{hostclass:${hostclass},environment:${environment}}  ${comparator_2} ${critical_2}
+      message: |
+          CPU load is greater than the threshold of 75 and Mem free is less than the threshold of 25
+          Autoscaling policy ${policy_adjustment} will be triggered soon.
+      tags:
+          hostclass: "${hostclass}"
+          environment: "production"
+          policy_adjustment: "${policy_adjustment}"
+          monitor_type: "astroscaler"
+          policy_cooldown: "${policy_cooldown}"
+      notify:
+        - "example@example.com"
+
+      with_variables:
+      - comparator_1: ">"
+        critical_1: "75"
+        comparator_2: "<"
+        critical_2: "30"
+        hostclass: "mhcbanana"
+        policy_adjustment: "+1"
+        policy_cooldown: "180"
+        name_1: "high"
+        name_2: "low"
+      - comparator_1: "<"
+        critical_1: "10"
+        comparator_2: ">"
+        critical_2: "70"
+        hostclass: "mhcbanana"
+        policy_adjustment: "-1"
+        policy_cooldown: "180"
+        name_1: "low"
+        name_2: "high"
