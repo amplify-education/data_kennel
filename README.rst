@@ -4,6 +4,10 @@ data\_kennel
 .. image:: https://api.codacy.com/project/badge/Grade/3599930cf25b4324a93b6d356bae893b
    :alt: Codacy Badge
    :target: https://www.codacy.com/app/CFER/data_kennel?utm_source=github.com&utm_medium=referral&utm_content=amplify-education/data_kennel&utm_campaign=badger
+.. image:: https://travis-ci.org/amplify-education/data_kennel.svg?branch=master
+    :target: https://travis-ci.org/amplify-education/data_kennel
+.. image:: https://camo.githubusercontent.com/890acbdcb87868b382af9a4b1fac507b9659d9bf/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6c6963656e73652d4d49542d626c75652e737667
+    :target: https://raw.githubusercontent.com/amplify-education/data_kennel/master/LICENSE
 
 Data Kennel is a CLI tool for managing Datadog infrastructure.
 
