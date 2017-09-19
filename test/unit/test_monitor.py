@@ -382,7 +382,7 @@ class DataKennelMonitorTests(TestCase):
                         "This alert has recovered.\n{{/is_recovery}}\n@example@example.com",
                 tags=["foo_1:bar_1", "foo_2:bar_2", "source:data_kennel", "team:mock_team", ANY,
                       "dk_type:Monitor"],
-                type="metric alert",
+                type="composite",
                 name="[DK] mock_team | mock_composite_monitor for bar_1 - bar_2"
             ),
             call(
@@ -403,7 +403,7 @@ class DataKennelMonitorTests(TestCase):
                         "This alert has recovered.\n{{/is_recovery}}\n@example@example.com",
                 tags=["foo_1:foo_1", "foo_2:foo_2", "source:data_kennel", "team:mock_team", ANY,
                       "dk_type:Monitor"],
-                type="metric alert",
+                type="composite",
                 name="[DK] mock_team | mock_composite_monitor for foo_1 - foo_2"
             )
         ])
@@ -442,7 +442,7 @@ class DataKennelMonitorTests(TestCase):
                         "This alert has recovered.\n{{/is_recovery}}\n@example@example.com",
                 tags=["foo_1:bar_1", "foo_2:bar_2", "source:data_kennel", "team:mock_team", ANY,
                       "dk_type:Monitor"],
-                type="metric alert",
+                type="composite",
                 name="[DK] mock_team | mock_composite_monitor for bar_1 - bar_2",
                 options={'notify_audit': True}
             )
@@ -481,7 +481,7 @@ class DataKennelMonitorTests(TestCase):
                         "This alert has recovered.\n{{/is_recovery}}\n@example@example.com",
                 tags=["foo_1:bar_1", "foo_2:bar_2", "source:data_kennel", "team:mock_team2", ANY,
                       "dk_type:Monitor"],
-                type="metric alert",
+                type="composite",
                 name="[DK] mock_team2 | mock_composite_monitor for bar_1 - bar_2"
             ),
             call(
@@ -704,7 +704,7 @@ class DataKennelMonitorTests(TestCase):
                 tags=["foo_1:bar_1", "foo_2:bar_2", "source:data_kennel", "team:mock_team", ANY,
                       "dk_type:Monitor"],
                 name="[DK] mock_team | mock_composite_monitor for bar_1 - bar_2",
-                type="metric alert",
+                type="composite",
                 extra="bar1-bar2",
                 options={
                     "key": "value"
@@ -737,7 +737,7 @@ class DataKennelMonitorTests(TestCase):
                 tags=["foo_1:foo_1", "foo_2:foo_2", "source:data_kennel", "team:mock_team", ANY,
                       "dk_type:Monitor"],
                 name="[DK] mock_team | mock_composite_monitor for foo_1 - foo_2",
-                type="metric alert",
+                type="composite",
                 extra="foo1-foo2",
                 options={
                     "key": "value"
@@ -923,7 +923,7 @@ class DataKennelMonitorTests(TestCase):
                         "This alert has recovered.\n{{/is_recovery}}\n@example@example.com",
                 tags=["foo_1:foo_1", "foo_2:foo_2", "source:data_kennel", "team:mock_team", ANY,
                       "dk_type:Monitor"],
-                type="metric alert",
+                type="composite",
                 name="[DK] mock_team | mock_composite_monitor for foo_1 - foo_2"
             )
         ])
@@ -958,7 +958,7 @@ class DataKennelMonitorTests(TestCase):
                 tags=["foo_1:bar_1", "foo_2:bar_2", "source:data_kennel", "team:mock_team", ANY,
                       "dk_type:Monitor"],
                 name="[DK] mock_team | mock_composite_monitor for bar_1 - bar_2",
-                type="metric alert",
+                type="composite",
                 extra="bar1-bar2",
                 options={
                     "key": "value"
