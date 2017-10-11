@@ -4,11 +4,11 @@ Class for parsing Data Kennel's configuration file.
 import copy
 import glob
 
-import yaml
 import os
 import re
 import json
 import logging
+import yaml
 from schema import Schema, Optional, Or, Use, SchemaError
 
 from data_kennel.util import convert_dict_to_tags, is_truthy, convert_tags_to_dict
@@ -112,7 +112,7 @@ class Config(object):
         self._api_key = api_key
         self._app_key = app_key
 
-        for team in configs.keys():
+        for team in configs:
             self.team_config[team] = self._interpolate_config(configs[team])
 
     @property
@@ -191,13 +191,13 @@ class Config(object):
                 interpolated_monitor = monitor.copy()
                 interpolated_monitor.pop('with_variables', None)
 
-                reps = {re.escape('${{{0}}}'.format(str(k))): str(v) for k, v in variable_set.iteritems()}
-                pattern = re.compile("|".join(reps.keys()))
+                replaces = {re.escape('${{{0}}}'.format(str(k))): str(v) for k, v in variable_set.iteritems()}
+                pattern = re.compile("|".join(replaces.keys()))
 
                 # Dumps the complex dictionary into a simple string. Then replace all of our variables with
                 # their actual values there.
                 interpolated_monitor_string = pattern.sub(
-                    lambda m: reps[re.escape(m.group(0))],
+                    lambda m, reps=replaces: reps[re.escape(m.group(0))],
                     json.dumps(interpolated_monitor)
                 )
 
@@ -293,7 +293,7 @@ class Config(object):
             sub_monitor = {'name': SUB_MONITOR_NAME_TEMPLATE.format(name, index),
                            'type': monitor['type'],
                            'tags': tags,
-                           }
+                          }
             if monitor.get('options'):
                 sub_monitor['options'] = monitor.get('options')
             sub_monitor['query'] = query.strip()

@@ -1,15 +1,15 @@
 sudo: required
 dist: trusty
-language: ruby
-rvm:
-- "2.4"
+language: python
 python:
 - "2.7"
 install:
-- rake setup:develop
+- pip install -r requirements.pip --upgrade
+- pip install -r test-requirements.pip --upgrade
 script:
 - bash bin/versionCheck.sh $TRAVIS_BRANCH $TRAVIS_PULL_REQUEST
-- rake test
+- pylint --rcfile=tasks/lint/pylintrc --output-format=colorized data_kennel test
+- DATADOG_API_KEY=mock_api_key DATA_KENNEL_APP_KEY=mock_app_key nosetests --xunit-file nose.xml
 deploy:
   provider: pypi
   user: $PYPI_USER

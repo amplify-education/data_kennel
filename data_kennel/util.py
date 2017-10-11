@@ -106,5 +106,4 @@ def is_truthy(var):
     """Convenience function for checking whether a variable is truthy"""
     if isinstance(var, basestring):
         return var.lower() in YES_LIST
-    else:
-        return bool(var)
+    return bool(var)
