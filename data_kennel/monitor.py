@@ -78,7 +78,7 @@ class Monitor(object):
 
             if sub_monitor_ids:
                 # The monitor is a composite monitor. Build the query using the sub_monitor ids
-                configured_monitor['query'] = ' && '.join([str(id) for id in sub_monitor_ids])
+                configured_monitor['query'] = ' && '.join([str(mon_id) for mon_id in sub_monitor_ids])
                 configured_monitor['type'] = 'composite'
 
             # Process the principal monitor

@@ -1,12 +1,12 @@
 """
 Tests of data_kennel.config
 """
+from unittest import TestCase
+
 import random
 import mock
 
-from unittest import TestCase
 from schema import SchemaError
-
 from data_kennel.config import Config
 
 
