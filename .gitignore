@@ -31,6 +31,7 @@ pip-log.txt
 # Test reports
 cover/
 .coverage
+.coverage.xml
 cover
 report-nosetests.xml
 report-nosetests.txt

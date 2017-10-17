@@ -9,7 +9,8 @@ install:
 script:
 - bash bin/versionCheck.sh $TRAVIS_BRANCH $TRAVIS_PULL_REQUEST
 - pylint --rcfile=tasks/lint/pylintrc --output-format=colorized data_kennel test
-- DATADOG_API_KEY=mock_api_key DATA_KENNEL_APP_KEY=mock_app_key nosetests --xunit-file nose.xml
+- DATADOG_API_KEY=mock_api_key DATA_KENNEL_APP_KEY=mock_app_key nosetests --xunit-file nosetests.xml --with-coverage --cover-xml
+- python-codacy-coverage -r coverage.xml
 deploy:
   provider: pypi
   user: $PYPI_USER
