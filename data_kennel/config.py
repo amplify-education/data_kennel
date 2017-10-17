@@ -290,10 +290,11 @@ class Config(object):
 
         for query in sub_queries:
             # Create a new monitor for each
-            sub_monitor = {'name': SUB_MONITOR_NAME_TEMPLATE.format(name, index),
-                           'type': monitor['type'],
-                           'tags': tags,
-                          }
+            sub_monitor = {
+                'name': SUB_MONITOR_NAME_TEMPLATE.format(name, index),
+                'type': monitor['type'],
+                'tags': tags,
+            }
             if monitor.get('options'):
                 sub_monitor['options'] = monitor.get('options')
             sub_monitor['query'] = query.strip()
