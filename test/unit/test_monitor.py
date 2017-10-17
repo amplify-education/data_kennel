@@ -450,6 +450,14 @@ class DataKennelMonitorTests(TestCase):
         monitor_api.update.assert_not_called()
         monitor_api.delete.assert_not_called()
 
+    def test_update_composite_create_dry_run(self, monitor_api):
+        """Tests that update handles composite monitors while in dry-run"""
+        self.composite_monitor_1.update(dry_run=True)
+
+        monitor_api.create.assert_not_called()
+        monitor_api.update.assert_not_called()
+        monitor_api.delete.assert_not_called()
+
     def test_update_creates_multi_team_monitors(self, monitor_api):
         """Update composite monitor makes correct calls"""
         monitor_bar1 = {'id': 'bar1'}

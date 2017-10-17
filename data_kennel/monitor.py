@@ -4,6 +4,8 @@ Data Kennel class for orchestrating management of Datadog monitors.
 import logging
 import json
 import difflib
+import random
+import string
 
 from datadog import api, initialize
 
@@ -215,11 +217,19 @@ class Monitor(object):
 
                 if not dry_run:
                     return api.Monitor.update(**merged_monitor)
+                else:
+                    return merged_monitor
         else:
             logger.info('Creating monitor: %s', configured_monitor['name'])
 
             if not dry_run:
                 return api.Monitor.create(**configured_monitor)
+            else:
+                # If we are making fake monitors for a composite monitor, then we need to insert a fake id for
+                # the monitor to have.
+                fake_id = ''.join(random.choice(string.digits + string.ascii_uppercase) for _ in range(12))
+                configured_monitor["id"] = fake_id
+                return configured_monitor
 
     def _is_principal_monitor(self, monitor):
         """
