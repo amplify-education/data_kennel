@@ -6,7 +6,7 @@ Usage:
     dk_monitor [--debug] [--config=CONFIG | --config-dir=CONFIG_PATH] list [--tags=TAGS]...
     dk_monitor [--debug] [--dry-run] [--config=CONFIG  | --config-dir=CONFIG_PATH] update [--tags=TAGS]...
     dk_monitor [--debug] [--dry-run] [--config=CONFIG  | --config-dir=CONFIG_PATH] delete [--tags=TAGS]...
-    dk_monitor [--help]
+    dk_monitor [--help | --version]
 
 Commands:
     list      List monitors.
@@ -22,6 +22,7 @@ Options:
     --dry-run                       Print what would happen, but don't actually do it.
     --config CONFIG, -c             The path to the config file.
     --config-dir CONFIG_PATH, -cd   The path to the config directory.
+    --version                       Print the version of Data Kennel.
 """
 from __future__ import print_function
 
@@ -30,6 +31,7 @@ import os
 from docopt import docopt
 from schema import Schema, Or, And, Use, Regex, Optional
 
+from data_kennel.version import __version__
 from data_kennel.monitor import Monitor
 from data_kennel.config import Config
 from data_kennel.util import configure_logging, run_gracefully, print_table, convert_tags_to_dict
@@ -50,7 +52,7 @@ ARGS_SCHEMA = Schema(
 
 def run():
     """Parses command line and dispatches the commands"""
-    args = docopt(__doc__)
+    args = docopt(__doc__, version="Data Kennel {0}".format(__version__))
 
     ARGS_SCHEMA.validate(args)
 
