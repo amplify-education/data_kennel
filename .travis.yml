@@ -6,6 +6,7 @@ before_install:
 install:
   - pip install tox-travis
   - pip install codacy-coverage
+  - pip install pypandoc
 script:
   - mkdir reports # workaround for travis error when writing to this dir
   - bash bin/versionCheck.sh $TRAVIS_BRANCH $TRAVIS_PULL_REQUEST
