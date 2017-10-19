@@ -1,14 +1,18 @@
-sudo: false
+sudo: true
 language: python
 python: 2.7
 install:
   - pip install tox-travis
   - pip install codacy-coverage
 script:
-- mkdir reports # workaround for travis error when writing to this dir
-- bash bin/versionCheck.sh $TRAVIS_BRANCH $TRAVIS_PULL_REQUEST
-- tox
-- python-codacy-coverage -r reports/coverage.xml
+  - mkdir reports # workaround for travis error when writing to this dir
+  - bash bin/versionCheck.sh $TRAVIS_BRANCH $TRAVIS_PULL_REQUEST
+  - tox
+  - python-codacy-coverage -r reports/coverage.xml
+  - wget https://github.com/jgm/pandoc/releases/download/1.19.1/pandoc-1.19.1-1-amd64.deb -O $TRAVIS_BUILD_DIR/pandoc.deb
+  - sudo dpkg -i $TRAVIS_BUILD_DIR/pandoc.deb
+  - rm $TRAVIS_BUILD_DIR/pandoc.deb
+  - pandoc --version
 deploy:
   provider: pypi
   user: $PYPI_USER
