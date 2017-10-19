@@ -15,8 +15,12 @@ VERSION_FILE = os.path.join("data_kennel", "version.py")
 
 def get_long_description():
     """Reads the long description from the README"""
-    with open('README.md') as readmefile:
-        return readmefile.read()
+    try:
+        import pypandoc
+        return pypandoc.convert('README.md', 'rst')
+    except Exception:
+        print "Unable to convert README to RST"
+        return ""
 
 
 def get_version():
