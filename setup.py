@@ -35,6 +35,7 @@ def get_requirements():
     with open("requirements.pip") as reqfile:
         return filter(lambda line: not line.startswith(('#', '-')), reqfile.read().split("\n"))
 
+
 setup(
     name='data_kennel',
     version=get_version(),
@@ -62,8 +63,4 @@ setup(
     install_requires=get_requirements(),
     scripts=['bin/dk_monitor'],
     test_suite='nose.collector',
-    entry_points="""
-        [paste.app_factory]
-        main=data_kennel:main
-    """,
 )
