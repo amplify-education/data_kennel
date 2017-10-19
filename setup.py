@@ -15,7 +15,7 @@ VERSION_FILE = os.path.join("data_kennel", "version.py")
 
 def get_long_description():
     """Reads the long description from the README"""
-    with open('README.rst') as readmefile:
+    with open('README.md') as readmefile:
         return readmefile.read()
 
 
