@@ -18,8 +18,8 @@ def get_long_description():
     try:
         import pypandoc
         return pypandoc.convert('README.md', 'rst')
-    except Exception:
-        print "Unable to convert README to RST"
+    except Exception as ex:
+        print "Unable to convert README to RST: '{}'".format(ex)
         return ""
 
 
