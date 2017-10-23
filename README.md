@@ -38,7 +38,7 @@ For local development, Data Kennel also includes a setup script in the form of a
 
 Data Kennel expects your Datadog API and APP keys to be available as environment variables, as `DATADOG_API_KEY` and `DATA_KENNEL_APP_KEY`. Here is an example:
 
-``` sourceCode
+``` bash
 # Data Kennel Envvars
 export DATADOG_API_KEY="change_me"
 export DATA_KENNEL_APP_KEY="change_me"
