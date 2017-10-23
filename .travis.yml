@@ -9,7 +9,6 @@ install:
   - pip install codacy-coverage
   - pip install pypandoc
 script:
-  - mkdir reports # workaround for travis error when writing to this dir
   - bash bin/versionCheck.sh $TRAVIS_BRANCH $TRAVIS_PULL_REQUEST
   - tox
   - python-codacy-coverage -r reports/coverage.xml
