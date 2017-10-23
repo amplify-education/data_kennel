@@ -13,6 +13,7 @@ sdist
 .installed.cfg
 
 # Build products
+.tox
 dist
 build
 venv
@@ -32,6 +33,7 @@ pip-log.txt
 cover/
 .coverage
 .coverage.xml
+coverage.xml
 cover
 report-nosetests.xml
 report-nosetests.txt
