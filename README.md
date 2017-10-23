@@ -20,9 +20,11 @@ Getting Started
 
 ### Prerequisites
 
-Data Kennel requires the following software to be installed: \* python &gt;= 2.7
+Data Kennel requires the following software to be installed: 
+* python >= 2.7
 
-For development: \* rake &gt;= 1.9.2
+For development: 
+* tox >= 2.9.1
 
 ### Installing/Building
 
@@ -30,9 +32,9 @@ Data Kennel can be installed from pip.
 
     pip install data_kennel
 
-For local development, Data Kennel also includes a setup script in the form of a rake task.
+For local development, Data Kennel also includes a setup script.
 
-    rake setup:develop
+    python setup.py develop
 
 ### Credentials
 
