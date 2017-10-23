@@ -15,6 +15,8 @@ VERSION_FILE = os.path.join("data_kennel", "version.py")
 
 def get_long_description():
     """Reads the long description from the README"""
+
+    # Attempt to convert the markdown readme to a reStructuredText one to work with legacy PyPi
     try:
         import pypandoc
         return pypandoc.convert('README.md', 'rst')
