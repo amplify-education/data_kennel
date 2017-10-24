@@ -195,7 +195,7 @@ class DataKennelConfigTests(TestCase):
 
     def test_teams(self):
         """Verify team variable read correctly"""
-        self.assertEqual(self.multi_team_config.teams, [MOCK_TEAM_1, MOCK_TEAM_2])
+        self.assertItemsEqual(self.multi_team_config.teams, [MOCK_TEAM_1, MOCK_TEAM_2])
 
     def test_teams_multi(self):
         """Verify team variable read correctly"""

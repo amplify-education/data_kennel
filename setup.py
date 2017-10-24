@@ -15,8 +15,14 @@ VERSION_FILE = os.path.join("data_kennel", "version.py")
 
 def get_long_description():
     """Reads the long description from the README"""
-    with open('README.rst') as readmefile:
-        return readmefile.read()
+
+    # Attempt to convert the markdown readme to a reStructuredText one to work with legacy PyPi
+    try:
+        import pypandoc
+        return pypandoc.convert('README.md', 'rst')
+    except Exception as ex:
+        print "Unable to convert README to RST: '{}'".format(ex)
+        return ""
 
 
 def get_version():
@@ -34,6 +40,7 @@ def get_requirements():
     """Reads the installation requirements from requirements.pip"""
     with open("requirements.pip") as reqfile:
         return filter(lambda line: not line.startswith(('#', '-')), reqfile.read().split("\n"))
+
 
 setup(
     name='data_kennel',
@@ -62,8 +69,4 @@ setup(
     install_requires=get_requirements(),
     scripts=['bin/dk_monitor'],
     test_suite='nose.collector',
-    entry_points="""
-        [paste.app_factory]
-        main=data_kennel:main
-    """,
 )
