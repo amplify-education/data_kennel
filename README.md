@@ -5,6 +5,8 @@ data\_kennel
 [![Build Status](https://travis-ci.org/amplify-education/data_kennel.svg?branch=master)](https://travis-ci.org/amplify-education/data_kennel)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/amplify-education/data_kennel/master/LICENSE)
 [![PyPi Package](https://badge.fury.io/py/data-kennel.svg)](https://pypi.python.org/pypi/data-kennel)
+[![Coverage Badge](https://api.codacy.com/project/badge/Coverage/3599930cf25b4324a93b6d356bae893b)](https://www.codacy.com/app/CFER/data_kennel?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=amplify-education/data_kennel&amp;utm_campaign=Badge_Coverage)
+[![Python Versions](https://img.shields.io/pypi/pyversions/data_kennel.svg)](https://pypi.python.org/pypi/data_kennel)
 
 Data Kennel is a CLI tool for managing Datadog infrastructure.
 

@@ -49,19 +49,21 @@ setup(
     long_description=get_long_description(),
     # Get strings from http://www.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
-        'Programming Language :: Python',
         'Topic :: Software Development :: Libraries :: Python Modules',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.7',
     ],
     keywords=[
         'python',
         'datadog',
         'cli'
     ],
-    author='amplify',
+    author='Amplify Education',
     author_email='astronauts.core@amplify.com',
     url='https://github.com/amplify-education/data_kennel',
     license='MIT',
-    packages=find_packages(exclude=['ez_setup']),
+    packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
     dependency_links=[
