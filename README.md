@@ -52,9 +52,9 @@ You can create API and APP keys in the [Datadog console](https://app.datadoghq.c
 
 ### Running Tests
 
-Data Kennel has lint checks and unit tests for use when developing. Simply run the rake task.
+Data Kennel has lint checks and unit tests for use when developing. Simply run tox.
 
-    rake test
+    tox
 
 Supported Operations
 ====================
