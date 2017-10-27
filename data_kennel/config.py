@@ -9,7 +9,7 @@ import re
 import json
 import logging
 import yaml
-from schema import Schema, Optional, Or, Use, SchemaError
+from schema import Schema, Optional, Or, Use, SchemaError, Regex
 
 from data_kennel.util import convert_dict_to_tags, is_truthy, convert_tags_to_dict
 from data_kennel import __version__
@@ -17,6 +17,8 @@ from data_kennel import __version__
 DEFAULT_RECOVERY_MESSAGE = "This alert has recovered."
 VARIABLE_PATTERN = "(\\$\\{.+?\\})"
 SUB_MONITOR_NAME_TEMPLATE = '[DK-C] {0} -- {1}'
+
+VARIABLE_VALIDATOR = Regex(VARIABLE_PATTERN)
 
 CONFIG_SCHEMA = Schema(
     {
@@ -44,22 +46,22 @@ CONFIG_SCHEMA = Schema(
                     Optional('silenced', default=None): {
                         str: Or(None, Use(int))
                     },
-                    Optional('notify_no_data'): Use(is_truthy),
-                    Optional('new_host_delay'): Or(Use(int), str),
-                    Optional('no_data_timeframe'): Or(Use(int), str),
-                    Optional('timeout_h'): Use(int),
-                    Optional('require_full_window'): Use(is_truthy),
-                    Optional('renotify_interval'): Or(Use(int), str),
+                    Optional('notify_no_data'): Or(Use(is_truthy), VARIABLE_VALIDATOR),
+                    Optional('new_host_delay'): Or(Use(int), VARIABLE_VALIDATOR),
+                    Optional('no_data_timeframe'): Or(Use(int), VARIABLE_VALIDATOR),
+                    Optional('timeout_h'): Or(Use(int), VARIABLE_VALIDATOR),
+                    Optional('require_full_window'): Or(Use(is_truthy), VARIABLE_VALIDATOR),
+                    Optional('renotify_interval'): Or(Use(int), VARIABLE_VALIDATOR),
                     Optional('escalation_message'): str,
-                    Optional('notify_audit'): Use(is_truthy),
-                    Optional('locked'): Use(is_truthy),
-                    Optional('include_tags'): Use(is_truthy),
+                    Optional('notify_audit'): Or(Use(is_truthy), VARIABLE_VALIDATOR),
+                    Optional('locked'): Or(Use(is_truthy), VARIABLE_VALIDATOR),
+                    Optional('include_tags'): Or(Use(is_truthy), VARIABLE_VALIDATOR),
                     Optional('thresholds'): {
-                        Optional('critical'): Or(Use(float), str),
-                        Optional('warning'): Or(Use(float), str),
-                        Optional('ok'): Or(Use(float), str)
+                        Optional('critical'): Or(Use(float), VARIABLE_VALIDATOR),
+                        Optional('warning'): Or(Use(float), VARIABLE_VALIDATOR),
+                        Optional('ok'): Or(Use(float), VARIABLE_VALIDATOR)
                     },
-                    Optional('evaluation_delay'): Use(int),
+                    Optional('evaluation_delay'): Or(Use(int), VARIABLE_VALIDATOR),
                     Optional(str): Use(str)
                 }
             }
