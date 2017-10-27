@@ -246,6 +246,11 @@ class DataKennelConfigTests(TestCase):
             ['mock_query_bar', 'mock_query_foo']
         )
 
+        self.assertEqual(
+            [monitor['tags']['foo'] for monitor in interpolated_monitors],
+            ["bar", "foo"]
+        )
+
     def test_composite_interpolation(self):
         """Verify composite monitor interpolation works correctly"""
         interpolated_config = self.composite_config._interpolate_config(MOCK_COMPOSITE_CONFIG[0])
