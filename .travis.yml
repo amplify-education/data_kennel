@@ -5,9 +5,7 @@ before_install:
   # need pandoc to convert markdown readme to reStructuredText that PyPi requires
   - sudo apt-get install pandoc
 install:
-  - pip install tox-travis
-  - pip install codacy-coverage
-  - pip install pypandoc
+  - pip install tox-travis codacy-coverage pypandoc
 script:
   - bash bin/versionCheck.sh $TRAVIS_BRANCH $TRAVIS_PULL_REQUEST
   - tox

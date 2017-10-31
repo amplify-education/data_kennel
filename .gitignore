@@ -1,56 +1,105 @@
+# Prepared dependencies for deployment
+dependencies/
+
+# serverless
+.serverless/
+serverless.yml
+
 # Mac OS X
 .DS_Store
 
-# Python bytecode
+# Byte-compiled / optimized / DLL files
+__pycache__/
 *.py[cod]
+*$py.class
 
-# Python packages
-*.egg
-*.egg-info
-eggs
-parts
-sdist
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
 .installed.cfg
-
-# Build products
-.tox
-dist
-build
-venv
-
-# RPM directories
-BUILD
-BUILDROOT
-RPMS
-SOURCES
-SPEC
-SRPMS
+*.egg
 
 # Installer logs
 pip-log.txt
+pip-delete-this-directory.txt
 
-# Test reports
-cover/
+# Unit test / coverage reports
+htmlcov/
+.tox/
 .coverage
-.coverage.xml
+.coverage.*
+.cache
+nosetests.xml
 coverage.xml
-cover
-report-nosetests.xml
-report-nosetests.txt
+*,cover
+.hypothesis/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# PyBuilder
+target/
+
+# IPython Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# celery beat schedule file
+celerybeat-schedule
+
+# dotenv
+.env
+
+# virtualenv
+venv/
+ENV/
+
+# Spyder project settings
+.spyderproject
+
+# Rope project settings
+.ropeproject
+
+# IDE files
+.project
+.pydevproject
+
+# Pycharm
+.idea/*
+.ropeproject/
 
 # Editor files
 *~
 *.sw?
 \#*#
-
-# IDE files
-.project
-.pydevproject
-.ropeproject
-
-# virtualenv file
-.venv
-
-# Data Kennel config
-data_kennel.yml
 *.iml
+node_modules/
