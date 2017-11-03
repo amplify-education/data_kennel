@@ -16,3 +16,5 @@ deploy:
   password: $PYPI_PASSWORD
   on:
     branch: master
+before_deploy:
+  - sed --expression "s|GIT_HASH|$TRAVIS_COMMIT|g" --in-place **/version.py

@@ -31,7 +31,7 @@ import os
 from docopt import docopt
 from schema import Schema, Or, And, Use, Regex, Optional
 
-from data_kennel.version import __version__
+from data_kennel.version import __version__, __git_hash__
 from data_kennel.monitor import Monitor
 from data_kennel.config import Config
 from data_kennel.util import configure_logging, run_gracefully, print_table, convert_tags_to_dict
@@ -52,7 +52,7 @@ ARGS_SCHEMA = Schema(
 
 def run():
     """Parses command line and dispatches the commands"""
-    args = docopt(__doc__, version="Data Kennel {0}".format(__version__))
+    args = docopt(__doc__, version="Data Kennel {0} (Commit: {1})".format(__version__, __git_hash__))
 
     ARGS_SCHEMA.validate(args)
 
