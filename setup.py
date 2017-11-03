@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 """setup.py controls the build, testing, and distribution of the egg"""
 
 from setuptools import setup, find_packages
@@ -15,13 +17,11 @@ VERSION_FILE = os.path.join("data_kennel", "version.py")
 
 def get_long_description():
     """Reads the long description from the README"""
-
-    # Attempt to convert the markdown readme to a reStructuredText one to work with legacy PyPi
     try:
         import pypandoc
         return pypandoc.convert('README.md', 'rst')
     except Exception as ex:
-        print "Unable to convert README to RST: '{}'".format(ex)
+        print("Unable to convert README to RST: '{}'".format(ex))
         return ""
 
 
@@ -29,9 +29,9 @@ def get_version():
     """Reads the version from the package"""
     with open(VERSION_FILE) as handle:
         lines = handle.read()
-        version_result = VERSION_REGEX.search(lines)
-        if version_result:
-            return "{0}".format(version_result.group(1))
+        result = VERSION_REGEX.search(lines)
+        if result:
+            return result.groupdict()["version"]
         else:
             raise ValueError("Unable to determine __version__")
 
@@ -39,8 +39,7 @@ def get_version():
 def get_requirements():
     """Reads the installation requirements from requirements.pip"""
     with open("requirements.pip") as reqfile:
-        return filter(lambda line: not line.startswith(('#', '-')), reqfile.read().split("\n"))
-
+        return [line for line in reqfile.read().split("\n") if not line.startswith(('#', '-'))]
 
 setup(
     name='data_kennel',
@@ -60,7 +59,7 @@ setup(
         'cli'
     ],
     author='Amplify Education',
-    author_email='astronauts.core@amplify.com',
+    author_email='github@amplify.com',
     url='https://github.com/amplify-education/data_kennel',
     license='MIT',
     packages=find_packages(),
