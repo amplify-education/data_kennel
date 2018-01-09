@@ -219,8 +219,8 @@ class Monitor(object):
 
                 return merged_monitor
             else:
-                 logger.info('No updates needed for %s', real_monitor['name'])
-                 return real_monitor
+                logger.info('No updates needed for %s', real_monitor['name'])
+                return real_monitor
 
         else:
             logger.info('Creating monitor: %s', configured_monitor['name'])
