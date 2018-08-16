@@ -31,7 +31,7 @@ CONFIG_SCHEMA = Schema(
                 'query': str,
                 'type': Or('metric alert', 'service check', 'event alert', 'query alert'),
                 'message': str,
-                'notify': [
+                Optional('notify'): [
                     str
                 ],
                 Optional('tags'): {
@@ -248,7 +248,8 @@ class Config(object):
                     monitor['name'] = "[DK] {0} | {1}".format(team, monitor['name'])
 
                     # Add default recovery message and notificaiton options
-                    notifications = " ".join(['@' + notification for notification in monitor['notify']])
+                    notifications = " ".join([
+                        '@' + notification for notification in monitor.get('notify', [])])
                     format_string = (
                         "{{{{#is_alert}}}}\n{0}\n{{{{/is_alert}}}}\n"
                         "{{{{#is_recovery}}}}\n{1}\n{{{{/is_recovery}}}}\n"
@@ -260,7 +261,8 @@ class Config(object):
                     monitor['message'] = message
 
                     # This isn't needed anymore
-                    del monitor['notify']
+                    if monitor.get('notify') is not None:
+                        del monitor['notify']
 
                     configured_monitors.append(monitor)
 
