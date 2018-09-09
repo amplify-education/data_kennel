@@ -7,6 +7,7 @@ data\_kennel
 [![PyPi Package](https://badge.fury.io/py/data-kennel.svg)](https://pypi.python.org/pypi/data-kennel)
 [![Coverage Badge](https://api.codacy.com/project/badge/Coverage/3599930cf25b4324a93b6d356bae893b)](https://www.codacy.com/app/CFER/data_kennel?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=amplify-education/data_kennel&amp;utm_campaign=Badge_Coverage)
 [![Python Versions](https://img.shields.io/pypi/pyversions/data_kennel.svg)](https://pypi.python.org/pypi/data_kennel)
+[![Downloads](https://img.shields.io/badge/dynamic/json.svg?label=downloads&url=https%3A%2F%2Fpypistats.org%2Fapi%2Fpackages%2Fdata-kennel%2Frecent%3Fperiod%3Dmonth&query=data.last_month&colorB=brightgreen&suffix=%2Fmonth)](https://pypistats.org/packages/data-kennel)
 
 Data Kennel is a CLI tool for managing Datadog infrastructure.
 
